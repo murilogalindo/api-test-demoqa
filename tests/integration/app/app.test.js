@@ -22,6 +22,20 @@ describe('Create User Test', () => {
     console.log(resposta.body);
     expect(resposta.status).toBe(201); 
     console.log("userID", userID)
+
+     // Assert: Verify operators fields
+     expect(resposta.body).toHaveProperty('userID');
+     expect(resposta.body).toHaveProperty('username');
+     expect(resposta.body).toHaveProperty('books'); 
+
+     // Assert: Type filds
+     expect(typeof resposta.body.userID).toBe('string');
+     expect(typeof resposta.body.username).toBe('string');
+     expect(Array.isArray(resposta.body.books)).toBe(true);
+
+     console.log("User created successfully:", username, "-", userID);
+ 
+     
   });
 });
 
@@ -34,10 +48,22 @@ describe('Token generation test', () => {
           password: '@Muri123456'
         });
   
-        token = resposta.body.token
+      token = resposta.body.token
       console.log(resposta.body);
       expect(resposta.status).toBe(200); 
-      console.log("token", token)
+      
+    // Assert: Expected structure
+    expect(resposta.body).toHaveProperty('token');
+    expect(resposta.body).toHaveProperty('expires');
+    expect(resposta.body).toHaveProperty('status');
+    expect(resposta.body).toHaveProperty('result');
+
+    
+      expect(resposta.body.status).toBe('Success');
+      expect(resposta.body.result).toBe('User authorized successfully.');
+
+      console.log(" Token gerado:", token);
+
     });
   });
   
@@ -52,6 +78,9 @@ describe('Token generation test', () => {
   
       console.log(resposta.body);
       expect(resposta.status).toBe(200); 
+
+      //Assert 
+      expect(resposta.body).toBe(true);
 
     });
   });
