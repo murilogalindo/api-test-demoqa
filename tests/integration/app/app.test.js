@@ -9,7 +9,7 @@ let username; //variable that will store the username used when creating the use
 let token; //variable to store the token generated in Generate Token
 
 describe('Create User Test', () => {
-  it('must create a user with name and password', async () => {
+  it('must create a new user with name and password', async () => {
     const resposta = await request(baseURLAc)
       .post('/User')
       .send({
